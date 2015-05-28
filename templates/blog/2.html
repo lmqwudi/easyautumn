@@ -1,0 +1,125 @@
+{% extends "../base.html" %}
+{% block middle_body %}
+<div class="blog_content">
+    <h2><p>算法初步</p></h2>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;自从工作之后，俨然成了一个coder，机械的完成上面的任务，突然发现这tm是什么乱七八糟的 生活，本来基础就差，现在还变成这个状态。养成写博客的习惯，一方面不断提高自己，另一方面 不断提醒自己。 </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;算法本就是自己不擅长的领域，本科毕业面试百度就是死在算法上面，工作了就更没时间去系统学习 算法了（当然都是自己的毛病）。废话不多说,学习。 </p>
+<p>冒泡排序:循环，两两向后比较 </p>
+<pre><code>def bubble_sort(sList):
+    length = len(sList)
+    if length:
+        i = 0
+        while i &lt; length:
+            j = 0
+            while j &lt; length - i - 1:
+                if sList[j] &gt; sList[j+1]:
+                    sList[j], sList[j+1] = sList[j+1], sList[j]
+                j = j + 1
+            i = i + 1
+    return sList
+</code></pre>
+<p>选择排序:每次挑选数组的最值，与前置元素换位，然后继续挑选剩余元素的最值并重复操作 </p>
+<pre><code>def select_sort(L):
+    assert(type(L)==type(['']))
+    length = len(L)
+    if length==0 or length==1:
+        return L
+
+    def _max(s):
+        largest = s
+        for i in xrange(s,length):
+            if L[i] &gt; L[largest]:
+                largest = i
+        return largest
+
+    for i in xrange(length):
+        largest = _max(i)
+        if i != largest:
+            temp = L[largest]
+            L[largest] = L[i]
+            L[i] = temp
+    return L
+</code></pre>
+<p>插入排序:顺序地从数组里获取数据，并在一个已经排序好的序列里，插入到对应的位置 </p>
+<pre><code>def insert_sort(sList):
+    assert(type(sList)==type(['']))
+    length = len(sList)
+    if length == 0 or length == 1:
+        return sList
+    for i in xrange(1, length):
+        j = i - 1
+        while j &gt;= 0 :
+            if sList[j] &gt; sList[j+1]:
+                sList[j], sList[j+1] = sList[j+1], sList[j]
+            j-=1
+    return sList
+</code></pre>
+<p>归并排序:每次都将待排序的数组从中间分成两个数组，分别排序这两个数组，然后将它们再合并 </p>
+<pre><code>def merge_sort(seq):
+    if len(seq) &lt;= 1:
+        return seq
+    mid = int(len(seq)/2)
+    left = merge_sort(seq[:mid])
+    right = merge_sort(seq[mid:])
+    return merge(left, right)
+
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i] &lt;= right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    result += left[i:]
+    result += right[j:]
+    return result
+</code></pre>
+<p>快速排序:选取待排序数组中的一个元素，将数组中比这个元素大的元素作为一部分，而比这个元素小的元素作为另一部分，再将这两个部分和并</p>
+<pre><code># a little bad, use more space
+def quick_sort(l):
+    assert(type(l)==type(['']))
+    length = len(l)
+    if length==0 or length==1:
+        return l
+    if len(l)&lt;=1:
+        return l
+    left = [i for i in l[1:] if i &lt;= l[0]]
+    right = [i for i in l[1:] if i &gt; l[0]]
+    return quick_sort(left) + [l[0],] + quick_sort(right)
+
+# use less space
+def quickSort(l, s, e):
+    assert(type(l)==type(['']))
+    length = len(l)
+    if length == 0 or length &lt;= 1:
+        return l
+    def partition(l, start, end):
+        pivot = l[start]
+        while start &lt; end-1:
+            while end &gt; start and l[end] &lt; pivot:
+                end -= 1
+            l[start] = l[end]
+            while end &gt; start and l[start] &gt; pivot:
+                start += 1
+            l[end] = l[start]
+        l[start] = pivot
+        return start
+    #random pivot
+    def random_partition(l,start,end):
+        i = random.randint(start,end)
+        temp = l[i]
+        l[i] = l[start]
+        l[start] = temp
+        return partition(l,start,end)
+
+    if s&lt;e:
+        m = partition (l, s, e)
+        quickSort(l, s, m-1)
+        quickSort(l, m+1, e)
+    return l
+</code></pre>
+</div>
+{% end %}    

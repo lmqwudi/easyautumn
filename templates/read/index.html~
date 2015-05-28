@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+{% block middle_body %}
+
+<article>
+    <div class="banner">
+    <ul class="texts">
+        <p>The best life is use of willing attitude, a happy-go-lucky life. </p>
+        <p>最好的生活是用心甘情愿的态度，过随遇而安的生活。</p>
+    </ul>
+</div>
+
+<div class="bloglist">
+ 
+
+
+产品
+
+<a target="_blank" href="http://www.woshipm.com">人人都是产品经理</a>
+
+<a target="_blank" href="http://www.huxiu.com">虎嗅</a>
+
+<a target="_blank" href="http://www.cyzone.cn/">创业帮</a>
+
+<a target="_blank" href="http://www.tmtpost.com">钛媒体</a>
+
+<a target="_blank" href="http://www.36kr.com">36KR</a>
+
+
+<a target="_blank" href="http://baijia.baidu.com">百度百家</a>
+
+技术
+<a target="_blank" href="http://www.ituring.com.cn/minibook">图灵社区</a>
+
+<a target="_blank" href="http://stackoverflow.com" >StackOverflow</a>
+
+<a target="_blank" href="http://www.tuicool.com/mags/">编程狂人</a>
+
+<a target="_blank" href="http://news.ycombinator.com">黑客社区</a>
+</div>
+    
+</article>
+{% end %}    
